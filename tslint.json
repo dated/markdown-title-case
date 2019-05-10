@@ -1,6 +1,7 @@
 {
   "extends": "@oclif/tslint",
   "rules": {
-    "no-single-line-block-comment": false
+    "no-single-line-block-comment": false,
+    "object-curly-spacing": [true, "always"]
   }
 }
