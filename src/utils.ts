@@ -85,7 +85,7 @@ export const formatData = (data: string): [string, Record<string, string>[]] => 
       newLine = matches[1] + '"' + newTitle + '"'
 
       if (oldLine !== newLine) {
-        changes.push({ old: oldTitle, new: newTitle })
+        changes.push({old: oldTitle, new: newTitle})
         data = data.replace(oldLine, newLine)
       }
     }
@@ -103,7 +103,7 @@ export const formatData = (data: string): [string, Record<string, string>[]] => 
       newLine = heading + ' ' + newTitle
 
       if (oldLine !== newLine) {
-        changes.push({ old: oldTitle, new: newTitle })
+        changes.push({old: oldTitle, new: newTitle})
         data = data.replace(oldLine, newLine)
       }
     }

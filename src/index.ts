@@ -1,7 +1,8 @@
-import { Command, flags } from '@oclif/command'
+import {Command, flags} from '@oclif/command'
+import {readFileSync, writeFileSync} from 'fs'
 import * as glob from 'glob'
-import { writeFileSync, readFileSync } from 'fs'
-import { formatData } from './utils'
+
+import {formatData} from './utils'
 
 class MarkdownTitleCaseCommand extends Command {
   static description = 'describe the command here'
@@ -15,11 +16,11 @@ class MarkdownTitleCaseCommand extends Command {
   }
 
   static args = [
-    { name: 'path' },
+    {name: 'path'},
   ]
 
   async run() {
-    const { args, flags } = this.parse(MarkdownTitleCaseCommand)
+    const {args, flags} = this.parse(MarkdownTitleCaseCommand)
 
     if (!args.path) {
       this.error('Please provide a path.')
@@ -39,7 +40,7 @@ class MarkdownTitleCaseCommand extends Command {
       for (const file of globFiles) {
         try {
           const data: string = readFileSync(file, 'utf-8')
-          const [ formatted, changes ] = formatData(data)
+          const [formatted, changes] = formatData(data)
 
           if (changes.length) {
             issues = issues + changes.length
@@ -56,7 +57,7 @@ class MarkdownTitleCaseCommand extends Command {
           if (flags.fix) {
             writeFileSync(file, formatted)
           }
-        } catch(e) {
+        } catch (e) {
           this.error(e)
         }
       }
