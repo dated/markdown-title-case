@@ -1,6 +1,6 @@
 {
   "name": "@dated/markdown-title-case",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Edgar Goetzendorff <hello@dated.fun>",
   "bin": {
     "markdown-title-case": "./bin/run"
