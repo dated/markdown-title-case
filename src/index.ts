@@ -13,6 +13,11 @@ class MarkdownTitleCaseCommand extends Command {
       char: 'f',
       default: false
     }),
+    recursive: flags.boolean({
+      description: 'also traverse subfolders',
+      char: 'r',
+      default: false
+    })
   }
 
   static args = [
@@ -26,14 +31,14 @@ class MarkdownTitleCaseCommand extends Command {
       this.error('Please provide a path.')
     }
 
-    const pattern: string = args.path + '/**/*.{markdown,md}'
+    const pattern = `${args.path}${flags.recursive ? '/**/*.{markdown,md}' : '/*.{markdown,md}'}`
 
     glob(pattern, (err, globFiles) => {
       if (err) {
         this.error(err)
       }
 
-      let issues = 0
+      let issueCount = 0
 
       this.debug(`Found ${globFiles.length} markdown files.`)
 
@@ -43,13 +48,13 @@ class MarkdownTitleCaseCommand extends Command {
           const [formatted, changes] = formatData(data)
 
           if (changes.length) {
-            issues = issues + changes.length
+            issueCount = issueCount + changes.length
 
             this.warn('Found ' + changes.length + ' issues in ' + file)
             this.log('')
             for (const change of changes) {
-              this.log('     this line : ' + change.old)
-              this.log('     should be : ' + change.new + '\n')
+              this.log(`     this line : ${change.old}`)
+              this.log(`     should be : ${change.new}\n`)
             }
           }
 
@@ -61,8 +66,8 @@ class MarkdownTitleCaseCommand extends Command {
         }
       }
 
-      if (issues) {
-        this.warn('Found ' + issues + ' issues')
+      if (issueCount) {
+        this.warn(`Found ${issueCount} issues`)
       } else {
         this.warn('No Issues found!')
       }
