@@ -14,11 +14,21 @@
 yarn add @dated/markdown-title-case
 ```
 
-## Testing
+## Usage
 
 ```bash
-yarn test
+markdown-title-case PATH [--recursive] [--fix]
 ```
+
+## Markers
+
+- exclude line
+
+  If you want a specific line not to be processed, append the following at the end of it
+
+  ```
+  <!--- markdown-title-case: skip-line -->
+  ```
 
 ## Security
 
