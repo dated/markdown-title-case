@@ -66,6 +66,10 @@ const toTitleCase = (str: string): string => {
     .join('')
 }
 
+const checkForMarker = (line: string): boolean => {
+  return line.includes('markdown-title-case: skip-line')
+}
+
 export const formatData = (data: string): [string, Record<string, string>[]] => {
   const changes: Record<string, string>[] = []
   let oldTitle: string
@@ -91,9 +95,11 @@ export const formatData = (data: string): [string, Record<string, string>[]] => 
     }
   }
 
-  const matches: (RegExpMatchArray | null) = data.match(/^\#{1,6} ([a-zA-Z0-9\-\;\!\?\%\&\;\:\.\/\(\)\ ]+)$/mg)
+  let matches: (RegExpMatchArray | null) = data.match(/^\#{1,6} ([a-zA-Z0-9\\\[\]\#\-\;\!\?\%\&\;\:\.\/\(\)\ ]+)$/mg)
 
   if (matches) {
+    matches = matches.filter(match => !checkForMarker(match))
+
     for (const match of matches) {
       const words: string[] = match.split(' ')
       const heading: (string | undefined) = words.shift()
