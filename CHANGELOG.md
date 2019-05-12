@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.1.7] - 2019-05-12
+### Removed
+- Hardcoded white list.
+
 ## [0.1.6] - 2019-05-11
 ### Added
 - Handle skip-line marker.
