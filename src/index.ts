@@ -77,7 +77,7 @@ class MarkdownTitleCaseCommand extends Command {
           process.exit(1)
         }
       } else {
-        this.warn('No Issues found!')
+        this.log('No Issues found!')
       }
     })
   }
