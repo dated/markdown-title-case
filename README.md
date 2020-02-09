@@ -17,7 +17,7 @@ yarn add @dated/markdown-title-case
 ## Usage
 
 ```bash
-markdown-title-case PATH [--recursive] [--fix]
+markdown-title-case PATH [--recursive] [--fix] [--fail]
 ```
 
 ## Markers

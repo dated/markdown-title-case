@@ -17,6 +17,11 @@ class MarkdownTitleCaseCommand extends Command {
       description: 'also traverse subfolders',
       char: 'r',
       default: false
+    }),
+    fail: flags.boolean({
+      description: 'set non-zero return code if issues were found.',
+      char: 'F',
+      default: false
     })
   }
 
@@ -68,8 +73,11 @@ class MarkdownTitleCaseCommand extends Command {
 
       if (issueCount) {
         this.warn(`Found ${issueCount} issues`)
+        if(flags.fail) {
+          process.exit(1)
+        }
       } else {
-        this.warn('No Issues found!')
+        this.log('No Issues found!')
       }
     })
   }
